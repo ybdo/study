@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yb.dao.SysMarkMapper">
+  <resultMap id="BaseResultMap" type="com.yb.pojo.SysMark">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="stu_id" jdbcType="INTEGER" property="stuId" />
+    <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="mark" jdbcType="REAL" property="mark" />
+  </resultMap>
+  <sql id="_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By__Where_Clause">
+    <where>
+      <foreach collection=".oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, stu_id, paper_id, mark
+  </sql>
+  <select id="selectBy" parameterType="com.yb.pojo.SysMark" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_mark
+    <if test="_parameter != null">
+      <include refid="_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteBy" parameterType="com.yb.pojo.SysMark">
+    delete from sys_mark
+    <if test="_parameter != null">
+      <include refid="_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yb.pojo.SysMark">
+    insert into sys_mark (id, stu_id, paper_id, 
+      mark)
+    values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, 
+      #{mark,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yb.pojo.SysMark">
+    insert into sys_mark
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stuId != null">
+        stu_id,
+      </if>
+      <if test="paperId != null">
+        paper_id,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stuId != null">
+        #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null">
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countBy" parameterType="com.yb.pojo.SysMark" resultType="java.lang.Long">
+    select count(*) from sys_mark
+    <if test="_parameter != null">
+      <include refid="_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateBySelective" parameterType="map">
+    update sys_mark
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuId != null">
+        stu_id = #{record.stuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paperId != null">
+        paper_id = #{record.paperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By__Where_Clause" />
+    </if>
+  </update>
+  <update id="updateBy" parameterType="map">
+    update sys_mark
+    set id = #{record.id,jdbcType=INTEGER},
+      stu_id = #{record.stuId,jdbcType=INTEGER},
+      paper_id = #{record.paperId,jdbcType=INTEGER},
+      mark = #{record.mark,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By__Where_Clause" />
+    </if>
+  </update>
+
+</mapper>
