@@ -1,5 +1,10 @@
 package com.yb.service;
 
-public interface TestService {
+import com.yb.pojo.SysUser;
 
+import java.util.Set;
+
+public interface TestService {
+    Set<String> queryAllPerms(Long id);
+    SysUser selectUserById(Long id);
 }
