@@ -18,8 +18,8 @@ import javax.xml.parsers.SAXParserFactory;
 @RestController
 public class SaxController {
     @RequestMapping("/xml")
-    public Message xml() throws Exception{
-        SAXParserFactory factory=SAXParserFactory.newInstance();
+    public Message xml() throws Exception {
+        SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
         XMLReader reader = parser.getXMLReader();
         reader.setContentHandler(new MyContentHandler());

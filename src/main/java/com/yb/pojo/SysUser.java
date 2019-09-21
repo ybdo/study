@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SysUser implements Serializable {
+
+    private static final long serialVersionUID = 5571624617224056307L;
     private Integer id;
 
     private String name;

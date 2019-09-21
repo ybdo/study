@@ -27,8 +27,9 @@ public class SysUserServiceImpl implements SysUserService {
     SysMenuMapper menuMapper;
     int  userId = ShiroUtils.getUserId();
 
+
     @Override
-    @Cacheable(value = "redisCache",key="#number")
+    @Cacheable(cacheNames = "redisCacheManager",key="#number")
     public SysUser selectByUserNumber(int number) {
         System.out.println(number);
         return userMapper.selectByUserNumber(number);

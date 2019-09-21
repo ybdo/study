@@ -19,7 +19,6 @@ public class RedisMessageListener implements MessageListener {
         String body=new String(message.getBody());
         //渠道名称
         String topic =new String(pattern);
-        System.out.println(body);
-        System.out.println(topic);
+        System.out.println("通过渠道："+topic+"  接收到了消息："+body);
     }
 }
