@@ -74,7 +74,7 @@ public class RedisTestController {
     @RequestMapping("/test1")
     public Message test1(){
         SysUser user = (SysUser)redisTemplate.opsForValue().get("id");
-        System.out.println(user.getNumber());
+        System.out.println(user.getUserName());
         return Message.ok();
     }
 
